@@ -10,7 +10,6 @@ public static class Tenants
         Id = 1.ToString(),
         Name = "علی",
         Identifier = "ali",
-
     };
 
     public static readonly TenantInfo AboozarTenant = new()

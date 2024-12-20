@@ -1,6 +1,9 @@
-@Aboozar_HostAddress = http://localhost:5106
+@Aboozar_HostAddress = https://localhost:7131
 
-GET {{Aboozar_HostAddress}}/weatherforecast/
-Accept: application/json
+GET {{Aboozar_HostAddress}}/weatherforecast/GetTime
+
+###
+
+GET {{Aboozar_HostAddress}}/weatherforecast/GetWeatherForecast
 
 ###
