@@ -1,5 +1,7 @@
 using Aboozar;
 using Finbuckle.MultiTenant;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,22 @@ builder.Services.AddMultiTenant<TenantInfo>()
     .WithInMemoryStore(Tenants.Register);
 
 
+builder.Services.AddLocalization(o=> o.ResourcesPath= "Resources");
+builder.Services.Configure<RequestLocalizationOptions>(
+    options =>
+    {
+        var supportedCultures = new List<CultureInfo>
+        {
+            new CultureInfo("en-US"),
+            new CultureInfo("fa-IR"),
+        };
+
+        options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+        options.SupportedCultures = supportedCultures;
+        options.SupportedUICultures = supportedCultures;
+    });
+
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -33,6 +51,7 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger(); 
 app.UseSwaggerUI();
 
+app.UseRequestLocalization();
 
 app.UseMultiTenant();
 

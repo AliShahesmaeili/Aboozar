@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace Aboozar.Controllers;
 
@@ -6,27 +7,35 @@ namespace Aboozar.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IStringLocalizer<WeatherForecastController> _localizer;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IStringLocalizer<WeatherForecastController> localizer)
     {
         _logger = logger;
+        _localizer = localizer;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public List<WeatherForecast> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var weatherForecasts = new List<WeatherForecast>();
+
+        weatherForecasts.Add(new()
         {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+            Summary = _localizer["text1"].Value,
+            Date = DateOnly.MaxValue,
+            TemperatureC = 20
+        });
+
+        weatherForecasts.Add(new()
+        {
+            Summary = _localizer["text1"].Value,
+            Date = DateOnly.MinValue,
+            TemperatureC = 25
+        });
+
+
+        return weatherForecasts;
     }
 }
