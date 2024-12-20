@@ -1,12 +1,14 @@
 {
   "profiles": {
-    "http": {
+    "AliAndAboozar": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+      "launchBrowser": true,
+      "launchUrl": "swagger",
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5106"
+      "applicationUrl": "https://localhost:7132;https://localhost:7131"
     },
     "Ali": {
       "commandName": "Project",
