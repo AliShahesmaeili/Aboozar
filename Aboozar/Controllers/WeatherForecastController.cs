@@ -16,7 +16,15 @@ public class WeatherForecastController : ControllerBase
         _localizer = localizer;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+
+    [HttpGet("GetTime")]
+    [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
+    public string GetTime()
+    {
+        return DateTime.Now.Millisecond.ToString();
+    }
+
+    [HttpGet("GetWeatherForecast")]
     public List<WeatherForecast> Get()
     {
         var weatherForecasts = new List<WeatherForecast>();

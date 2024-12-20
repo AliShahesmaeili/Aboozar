@@ -17,6 +17,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddResponseCaching();
+
+
 builder.Services.AddMultiTenant<TenantInfo>()
     .WithDelegateStrategy(Tenants.GetStrategy)
     .WithInMemoryStore(Tenants.Register);
@@ -52,6 +55,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseRequestLocalization();
+
+app.UseResponseCaching();
 
 app.UseMultiTenant();
 
