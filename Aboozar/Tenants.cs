@@ -44,7 +44,7 @@ public static class Tenants
 
         if (port == 7132)
             tenantInfo = AliTenant;
-        else if (port == 7131)
+        else /*if (port == 7131)*/
             tenantInfo = AboozarTenant;
 
 
